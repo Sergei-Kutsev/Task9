@@ -12,8 +12,7 @@ namespace Task9
         {
             int x = 0;
             int y = 0;
-            int expression = 0;
-            int mathSymb = 0;
+            int[] mathSymb = { 1, 2, 3, 4 };
 
             try
             {
@@ -35,51 +34,18 @@ namespace Task9
     3 - произведение
     4 - частное");
             Console.Write("Выш выбор: ");
-            try
-            {
-                mathSymb = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.ReadKey();
-                return;
-            }
 
+
+            int numberSymbol = 0;
 
             try
             {
-                int[] array = new int[4];
-
-
-                if (mathSymb == 1)
-                {
-                    expression = x + y;
-                    array[0] = x + y;
-                }
-                else if (mathSymb == 2)
-                {
-                    expression = x - y;
-                    array[1] = 2;
-                }
-                else if (mathSymb == 3)
-                {
-                    expression = x * y;
-                    array[2] = 3;
-                }
-                else if (mathSymb == 4)
-                {
-                    expression = x / y;
-                    array[3] = 4;
-                }
-                else
-                {
-                    array[5]=5;
-                }
+                numberSymbol = Convert.ToInt32(Console.ReadLine());
+                int symbol = mathSymb[-1 + numberSymbol];
             }
-            catch (DivideByZeroException ex)
+            catch (FormatException)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Ошибка. Некорректный ввод.");
                 Console.ReadKey();
                 return;
             }
@@ -89,9 +55,36 @@ namespace Task9
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine($"Результат = {expression}");
 
+            double expression = 0;
+            try
+            {
+                if (numberSymbol == 1)
+                {
+                    expression = x + y;
+                }
+                else if (numberSymbol == 2)
+                {
+                    expression = x - y;
+                }
+                else if (numberSymbol == 3)
+                {
+                    expression = x * y;
+                }
+                else if (numberSymbol == 4)
+                {
+                    expression = x / y;
+                }
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("Результат = {0}", expression);
             Console.ReadKey();
+
 
         }
     }
